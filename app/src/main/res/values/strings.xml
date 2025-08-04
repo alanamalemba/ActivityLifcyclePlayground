@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Activity Lifcycle Playground</string>
+    <string name="exit_activity">Exit Activity</string>
+    <string name="open_a_non_full_screen_activity">Open A non full-screen activity</string>
+</resources>

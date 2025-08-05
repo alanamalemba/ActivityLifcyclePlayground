@@ -1,7 +1,6 @@
 package com.example.activitylifcycleplayground
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +15,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setUpBackButtonListener()
-
         binding.buttonExit.setOnClickListener {
             finish()
         }
+        binding.buttonSave.setOnClickListener {
+            saveMessage()
+        }
+
+        binding.textViewPreview.text = savedInstanceState?.getString("savedTextViewMessage")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val savedTextViewMessage = binding.textViewPreview.text.toString()
+
+        outState.putString("savedTextViewMessage", savedTextViewMessage)
+    }
+
+    private fun saveMessage() {
+
+        val userMessage = binding.editTextMessage.text.toString()
+
+        File(filesDir, "user_message.txt").writeText(userMessage)
+
+        binding.textViewPreview.text = getString(R.string.your_message, userMessage)
+        binding.editTextMessage.setText("")
     }
 
     private fun setUpBackButtonListener() {

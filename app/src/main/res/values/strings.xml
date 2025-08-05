@@ -5,4 +5,6 @@
     <string name="please_enter_message">Please enter message</string>
     <string name="leave_app">Leave App ?</string>
     <string name="warning_icon">warning icon</string>
+    <string name="save_changes">Save changes</string>
+    <string name="your_message">Your message: %1$s</string>
 </resources>

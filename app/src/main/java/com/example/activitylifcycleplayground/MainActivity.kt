@@ -1,10 +1,9 @@
 package com.example.activitylifcycleplayground
 
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.activitylifcycleplayground.databinding.ActivityMainBinding
 import java.io.File
@@ -13,30 +12,36 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val userMessage = binding.editTextMessage.text.toString()
-                File(filesDir, "user_message.txt").writeText(userMessage, Charsets.UTF_8)
-                Toast.makeText(this@MainActivity, "Back button pressed", Toast.LENGTH_LONG).show()
-                finish()
-            }
-        }
-
-        onBackPressedDispatcher.addCallback(this, callback)
-
+        setUpBackButtonListener()
 
         binding.buttonExit.setOnClickListener {
             finish()
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    private fun setUpBackButtonListener() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showDialog()
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    fun showDialog() {
+        AlertDialog.Builder(this).setTitle("Warning!").setMessage("Leave App ?")
+            .setPositiveButton("Yes") { _, _ ->
+                finish()
+            }.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }.setNeutralButton("More") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
     }
 }

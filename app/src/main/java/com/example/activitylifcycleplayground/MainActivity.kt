@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showDialog() {
         AlertDialog.Builder(this).setTitle("Warning!").setMessage("Leave App ?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setView(R.layout.dialog_warning).setPositiveButton("Yes") { _, _ ->
                 finish()
             }.setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()

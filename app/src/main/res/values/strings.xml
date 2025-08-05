@@ -7,4 +7,6 @@
     <string name="warning_icon">warning icon</string>
     <string name="save_changes">Save changes</string>
     <string name="your_message">Your message: %1$s</string>
+    <string name="show_fragment">Show fragment</string>
+    <string name="remove_fragment">Remove fragment</string>
 </resources>

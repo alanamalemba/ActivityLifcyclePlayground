@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.example.activitylifcycleplayground.databinding.ActivityMainBinding
 import java.io.File
 
@@ -24,6 +25,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textViewPreview.text = savedInstanceState?.getString("savedTextViewMessage")
+
+        binding.buttonShowFragment.setOnClickListener { showFragment() }
+        binding.buttonRemoveFragment.setOnClickListener { removeFragment() }
+    }
+
+    private fun removeFragment() {
+    }
+
+    private fun showFragment() {
+        supportFragmentManager.commit {
+            add(R.id.fragment_container, TestFragment())
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

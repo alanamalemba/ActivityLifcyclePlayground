@@ -8,9 +8,10 @@ import androidx.fragment.app.commit
 import com.example.activitylifcycleplayground.databinding.ActivityMainBinding
 import java.io.File
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TestFragment.TestFragmentListener {
 
     private lateinit var binding: ActivityMainBinding
+    private val testFragment = TestFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +32,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun removeFragment() {
+        supportFragmentManager.commit {
+            remove(testFragment)
+        }
     }
 
     private fun showFragment() {
         supportFragmentManager.commit {
-            add(R.id.fragment_container, TestFragment())
+            add(R.id.fragment_container, testFragment)
         }
     }
 
@@ -75,5 +79,11 @@ class MainActivity : AppCompatActivity() {
             }.setNeutralButton("More") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    override fun clearActivityScreen() {
+        binding.editTextMessage.setText("")
+        binding.textViewPreview.text = ""
+        removeFragment()
     }
 }

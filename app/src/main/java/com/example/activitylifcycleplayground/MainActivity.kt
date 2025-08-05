@@ -2,6 +2,7 @@ package com.example.activitylifcycleplayground
 
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 val userMessage = binding.editTextMessage.text.toString()
                 File(filesDir, "user_message.txt").writeText(userMessage, Charsets.UTF_8)
+                Toast.makeText(this@MainActivity, "Back button pressed", Toast.LENGTH_LONG).show()
                 finish()
             }
         }
